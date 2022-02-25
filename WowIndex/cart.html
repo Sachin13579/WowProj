@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #Container2 {
+        display: grid;
+        grid-template-columns: repeat(3 1fr);
+        grid-gap: 3%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="Container2"></div>
+  </body>
+</html>
+<script>
+  var cart = JSON.parse(localStorage.getItem("product"));
+  cart.map(function (ndata) {
+    //   >>>>>>>>>
+    var cont = document.getElementById("Container2");
+
+    var div2 = document.createElement("div");
+    div2.setAttribute("id", "flex");
+
+    var image = document.createElement("img");
+    image.setAttribute("id", "image1");
+    image.setAttribute("src", ndata.image);
+
+    var product = document.createElement("p");
+    product.textContent = ndata.price;
+
+    var rating = document.createElement("p");
+    rating.setAttribute("id", "Prate");
+    rating.textContent = ndata.rate;
+
+    var name = document.createElement("p");
+    name.textContent = ndata.name;
+
+    var designation = document.createElement("button");
+    designation.setAttribute("id", "Pbut");
+    designation.textContent = ndata.role;
+    designation.addEventListener("click", function () {
+      addTocart(ndata);
+    });
+
+    div2.append(image, product, name, rating, designation);
+
+    document.querySelector("#Container2").append(div2);
+
+    function addTocart(ndata) {
+      console.log(ndata);
+      cart.push(ndata);
+      localStorage.setItem("product", JSON.stringify(cart));
+    }
+  });
+
+  // >>>>>>>>
+</script>
